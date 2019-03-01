@@ -8,7 +8,7 @@ const InitialState = {
   },
   {
       id:2,
-      nodeType: "server",
+      nodeType: "router",
   },
   {
       id: 3,
@@ -19,8 +19,9 @@ const InitialState = {
       nodeType: "server",
   }
 ],
+// nodeLength: 4,
 // data on the current battle
-links: [
+edges: [
   {
       id:1,
       fromNode: 1,
@@ -33,13 +34,24 @@ export default (state = InitialState, action) => {
     switch (action.type) {
      case 'CREATE_NODE':
      var newNode = {
-      id:1,
+      id:5,
       nodeType: "server"}
       return {
         ...state,
         nodes: [...state.nodes, newNode],
-        
-       }
+
+        // nodeLength: ...state.nodeLength++,
+        }
+      case 'CREATE_EDGE':
+     var newEdge = {
+      id:2,
+      fromNode: 2,
+      toNode: 4,
+     }
+      return {
+        ...state,
+        edges: [...state.edges, newEdge],
+        }
       
      default:
       return state

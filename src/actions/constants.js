@@ -1,2 +1,3 @@
 export const SIMPLE_ACTION = "SIMPLE_ACTION";
 export const CREATE_SERVER_NODE = "CREATE_NODE";
+export const CREATE_EDGE = "CREATE_EDGE";
