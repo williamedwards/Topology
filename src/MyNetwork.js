@@ -52,6 +52,12 @@ var options = {
           "treeSpacing": 400
       }
   },
+  "interaction": {
+      "dragNodes": "false",
+      // "dragView": "false",
+      // "zoomView": "false",
+
+  },
   "edges": {
       "smooth": {
           "type": "continuous"

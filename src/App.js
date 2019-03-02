@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from './logo.svg';
+
 import './App.css';
-import { simpleAction, createNode, createEdge } from './actions/simpleAction';
+import { simpleAction, createServerNode, createEdge, createFirewallNode, createRouterNode } from './actions/simpleAction';
 import TopologyFullView from './TopologyFullView';
 import EdgeForm from './EdgeForm';
 import MyNetwork from './MyNetwork';
+import NodeCreator from './NodeCreator';
 
 /* 
  * mapDispatchToProps
 */
 const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction()),
-  createNode: (nodeType) => dispatch(createNode(nodeType)),
+  createServerNode: ()  => dispatch(createServerNode()),
+  createRouterNode: ()  => dispatch(createRouterNode()),
+  createFirewallNode: ()  => dispatch(createFirewallNode()),
   createEdge: (fromNode, toNode) => dispatch(createEdge(fromNode, toNode)),
 })
 
@@ -29,8 +32,14 @@ class App extends Component {
   simpleAction = (event) => {
     this.props.simpleAction();
   }
-  createNode = (event) => {
-    this.props.createNode();
+  createServerNode = (event) => {
+    this.props.createServerNode();
+  }
+  createRouterNode = (event) => {
+    this.props.createRouterNode();
+  }
+  createFirewallNode = (event) => {
+    this.props.createFirewallNode();
   }
   createEdge = (event) => {
     this.props.createEdge();
@@ -41,7 +50,11 @@ class App extends Component {
     <MyNetwork/>
     <TopologyFullView/>
     <EdgeForm/>
-    <button onClick={this.createNode}>Test adding a Node action</button>
+    <NodeCreator/>
+    {/* <NodeCreator/> */}
+    {/* <button onClick={this.createServerNode}>Test adding a Node action</button>
+    <button onClick={this.createRouterNode}>Test adding a Node action</button>
+    <button onClick={this.createFirewallNode}>Test adding a Node action</button>
     <button onClick={this.createEdge}>Test adding a Edge action</button>
     <header className="App-header">
      <img src={logo} className="App-logo" alt="logo" />
@@ -57,7 +70,7 @@ class App extends Component {
    
     
     
-    </p>
+    </p> */}
    </div>
   );
  }

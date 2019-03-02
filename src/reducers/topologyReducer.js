@@ -33,13 +33,37 @@ edges: [
 
 export default (state = InitialState, action) => {
     switch (action.type) {
-     case 'CREATE_NODE':
+     case 'CREATE_SERVER_NODE':
      var newNode = {
       id:state.nodeLength+1,
-      nodeType: "server",
+      nodeType: 'server',
       
     }
       return {
+        ...state,
+        nodes: [...state.nodes, newNode],
+        nodeLength: state.nodeLength+1,
+        // nodeLength: ...state.nodeLength++,
+        }
+      case 'CREATE_ROUTER_NODE':
+     var newNode = {
+      id:state.nodeLength+1,
+      nodeType: 'router',
+      
+    }
+      return {
+        ...state,
+        nodes: [...state.nodes, newNode],
+        nodeLength: state.nodeLength+1,
+        // nodeLength: ...state.nodeLength++,
+        }
+      case 'CREATE_FIREWALL_NODE':
+     var newNode = {
+      id:state.nodeLength+1,
+      nodeType: 'firewall',
+      
+      }
+        return {
         ...state,
         nodes: [...state.nodes, newNode],
         nodeLength: state.nodeLength+1,
