@@ -57,9 +57,7 @@ var options = {
           "type": "continuous"
       }
   }};
-  // console.log(this.props.nodes)
-  // console.log(this.props)
-  // console.log(this.props.nodes)
+  
 class MyNetwork extends Component {
   constructor(props)  {
     
@@ -70,9 +68,9 @@ class MyNetwork extends Component {
     nodes(){
       
       const nodesItems = this.props.topologyReducer.nodes.map((node) =>
-          <Node key= {node.index} id={node.id} label={node.nodeType}/>
+          <Node key= {node.id} id={node.id} label={node.nodeType}/>
       );
-      console.log(this.edges())
+      
       return (
           <>
               {nodesItems}
@@ -83,10 +81,9 @@ class MyNetwork extends Component {
   edges(){
       
       const edgesItems = this.props.topologyReducer.edges.map((edge) =>
-          <Edge key = {edge.index} id={edge.id} from={edge.fromNode}  to={edge.toNode}         />
+          <Edge key = {edge.id} id={edge.id} from={edge.fromNode}  to={edge.toNode}         />
       );
-      // console.log(this.nodes().props.children,"nodes");
-      console.log(React.version)
+      
       return (
           <>
               {edgesItems}
@@ -117,5 +114,5 @@ class MyNetwork extends Component {
   }
 }
 
-console.log("we made it this far")
+
 export default connect(mapStateToProps, mapDispatchToProps)(MyNetwork);

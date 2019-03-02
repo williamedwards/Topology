@@ -10,16 +10,15 @@ export const simpleAction = () => dispatch => {
    export const createNode = (nodeType) => dispatch => {
     dispatch({
      type: 'CREATE_NODE',
-     nodeType: nodeType,
-    //  nodeLength: state.nodeLength++,
+     nodeType,
     })
    };
 
-   export const createEdge = (from, to) => dispatch => {
+   export const createEdge = (fromNode, toNode) => dispatch => {
     dispatch({
      type: 'CREATE_EDGE',
-     fromNode: from,
-     toNode: to,
+     toNode,
+     fromNode,
     //  nodeLength: state.nodeLength++,
     })
    };

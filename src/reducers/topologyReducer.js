@@ -19,7 +19,7 @@ const InitialState = {
       nodeType: "server",
   }
 ],
-// nodeLength: 4,
+   nodeLength: 4,
 // data on the current battle
 edges: [
   {
@@ -27,30 +27,37 @@ edges: [
       fromNode: 1,
       toNode: 2,
   }
-]
+],
+  edgeLength: 1,
 };
 
 export default (state = InitialState, action) => {
     switch (action.type) {
      case 'CREATE_NODE':
      var newNode = {
-      id:5,
-      nodeType: "server"}
+      id:state.nodeLength+1,
+      nodeType: "server",
+      
+    }
       return {
         ...state,
         nodes: [...state.nodes, newNode],
-
+        nodeLength: state.nodeLength+1,
         // nodeLength: ...state.nodeLength++,
         }
       case 'CREATE_EDGE':
      var newEdge = {
-      id:2,
-      fromNode: 2,
-      toNode: 4,
+      id: state.edgeLength + 1,
+      fromNode: action.fromNode,
+      toNode: action.toNode,
+      
      }
+     console.log(action.toNode, 'toNode')
+     console.log(action.fromNode)
       return {
         ...state,
         edges: [...state.edges, newEdge],
+        edgeLength: state.edgeLength+1,
         }
       
      default:

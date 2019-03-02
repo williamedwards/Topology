@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { simpleAction, createNode, createEdge } from './actions/simpleAction';
 import TopologyFullView from './TopologyFullView';
+import EdgeForm from './EdgeForm';
 import MyNetwork from './MyNetwork';
 
 /* 
@@ -11,8 +12,8 @@ import MyNetwork from './MyNetwork';
 */
 const mapDispatchToProps = dispatch => ({
   simpleAction: () => dispatch(simpleAction()),
-  createNode: () => dispatch(createNode()),
-  createEdge: () => dispatch(createEdge())
+  createNode: (nodeType) => dispatch(createNode(nodeType)),
+  createEdge: (fromNode, toNode) => dispatch(createEdge(fromNode, toNode)),
 })
 
 /* 
@@ -39,7 +40,8 @@ class App extends Component {
    <div className="Topology">
     <MyNetwork/>
     <TopologyFullView/>
-    <button onClick={this.createNode}>Test adding a node action</button>
+    <EdgeForm/>
+    <button onClick={this.createNode}>Test adding a Node action</button>
     <button onClick={this.createEdge}>Test adding a Edge action</button>
     <header className="App-header">
      <img src={logo} className="App-logo" alt="logo" />
