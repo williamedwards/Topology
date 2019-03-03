@@ -32,6 +32,20 @@ class NodeCreator extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
 ;
   }
+  componentWillReceiveProps(nextProps) {
+    console.log('I got new props', nextProps);
+    this.setState({
+      toNode : nextProps.topologyReducer.nodeLength+1,
+      
+  });
+}
+
+  componentWillMount() {
+    console.log("i mounted",);
+    this.setState({
+      toNode : this.props.topologyReducer.nodeLength+1,
+  });
+  }
 
     // createServerNode = (fromNode, toNode, imageType) => {
       
@@ -59,7 +73,7 @@ class NodeCreator extends React.Component {
 
       handleChange(e) {
         console.log(e.target.value,"look for me here")
-        this.setState({ imageType: e.target.value, toNode: this.state.toNode+1});
+        this.setState({ imageType: e.target.value});
       }
       // handleSubmit(e) {
       //   console.log('here first')
