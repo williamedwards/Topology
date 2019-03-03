@@ -7,6 +7,9 @@ import TopologyFullView from './TopologyFullView';
 import EdgeForm from './EdgeForm';
 import MyNetwork from './MyNetwork';
 import NodeCreator from './NodeCreator';
+import NodeList from './NodeList';
+import MyGraph from './MyGraph';
+
 
 /* 
  * mapDispatchToProps
@@ -48,9 +51,11 @@ class App extends Component {
   return (
    <div className="Topology">
     <MyNetwork/>
-    <TopologyFullView/>
-    <EdgeForm/>
+    {/* <TopologyFullView/> */}
+    {/* <EdgeForm/> */}
     <NodeCreator/>
+    <NodeList/>
+    {/* <MyGraph/> */}
     {/* <NodeCreator/> */}
     {/* <button onClick={this.createServerNode}>Test adding a Node action</button>
     <button onClick={this.createRouterNode}>Test adding a Node action</button>

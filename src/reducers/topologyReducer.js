@@ -4,31 +4,16 @@ const InitialState = {
   nodes: [
   {
       id:1,
-      nodeType: "server",
-  },
-  {
-      id:2,
       nodeType: "router",
+      imageType: "",
   },
-  {
-      id: 3,
-      nodeType: "server",
-  },
-  {
-      id: 4,
-      nodeType: "server",
-  }
 ],
-   nodeLength: 4,
+   nodeLength: 1,
 // data on the current battle
 edges: [
-  {
-      id:1,
-      fromNode: 1,
-      toNode: 2,
-  }
+  
 ],
-  edgeLength: 1,
+  edgeLength: 0,
 };
 
 export default (state = InitialState, action) => {
@@ -37,12 +22,21 @@ export default (state = InitialState, action) => {
      var newNode = {
       id:state.nodeLength+1,
       nodeType: 'server',
-      
-    }
+      imageType: action.imageType
+      }
+      var newEdge = {
+        id: state.edgeLength + 1,
+        fromNode: action.fromNode,
+        toNode: action.toNode,
+        
+       }
+    console.log("im in the reducer")
       return {
         ...state,
         nodes: [...state.nodes, newNode],
         nodeLength: state.nodeLength+1,
+        edges: [...state.edges, newEdge],
+        edgeLength: state.edgeLength+1,
         // nodeLength: ...state.nodeLength++,
         }
       case 'CREATE_ROUTER_NODE':

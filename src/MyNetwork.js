@@ -53,7 +53,7 @@ var options = {
       }
   },
   "interaction": {
-      "dragNodes": "false",
+      "dragNodes": false,
       // "dragView": "false",
       // "zoomView": "false",
 
@@ -68,57 +68,188 @@ class MyNetwork extends Component {
   constructor(props)  {
     
     super(props);
+    this.networkref = React.createRef();
+    this.state = {
+      nodes: this.props.topologyReducer.nodes,
+      edges: this.props.topologyReducer.edges,
     }
+    }
+
+    componentWillMount() {
+      console.log("i mounted");
+  
+    }
+
+    componentWillReceiveProps(nextProps) {
+      console.log('I got new props', nextProps);
+      this.setState({
+        nodes : nextProps.topologyReducer.nodes,
+        edges: nextProps.topologyReducer.edges
+    });
+    var Network = this.refs.MyNetwork;
+    
+    var options = {
+      layout: {
+          hierarchical: {
+              direction: "UD",
+              sortMethod: "directed",
+              nodeSpacing: 200,
+              treeSpacing: 400
+          }
+      },
+      interaction: {
+          dragNodes: false,
+          // "dragView": "false",
+          // "zoomView": "false",
+    
+      },
+      edges: {
+          smooth: {
+              type: "continuous"
+          }
+      },
+      physics: {
+        stabilization: {
+            enabled: true,
+            iterations: 5000, // maximum number of iteration to stabilize
+            fit: true
+        },
+    }
+      };
+  Network.network.setOptions(options);
+  // Network.network.fit()
+  }
     
     
     nodes(){
       
-      const nodesItems = this.props.topologyReducer.nodes.map((node) =>
+      const nodesItems = this.state.nodes.map((node) =>
           <Node key= {node.id} id={node.id} label={node.nodeType}/>
+
       );
-      
       return (
-          <>
-              {nodesItems}
-          </>
-      );
+        <>
+            {nodesItems}
+        </>
+    );
   }
 
   edges(){
       
-      const edgesItems = this.props.topologyReducer.edges.map((edge) =>
+      const edgesItems = this.state.edges.map((edge) => 
           <Edge key = {edge.id} id={edge.id} from={edge.fromNode}  to={edge.toNode}         />
       );
-      
       return (
           <>
               {edgesItems}
           </>
       );
+      
+      
   }
   
+  // drawNetwork(chartData) {
+  //   const chart = document.getElementById('chart'); //fails if DOM not rendered
+  //  //appends an svg to #chart html element and draws a d3 Chart
+  //  //assuming you chart function as Chart(element, data);
+  //   if(chart && chartData){ //draw only if DOM rendered and have chartData
+  //     new Chart(chart, chartData); //calls to draw graph
+  //   }
+  // }
+  // myNetwork(){
+  //   const Network = <Network options={options}>
+  //   {this.state.nodes.props.children}
+  //   {this.state.edges.props.children}
+  //   {/* {this.edges().props.children} */}
+  //   </Network>;
+  //   return (
+  //     <>
+  //         {Network}
+  //     </>
+  // );
+  // }
     
   render() {
+    console.log(this.nodes(), 'this.nodes')
+    console.log(this.nodes().props.children, 'children')
+    console.log(this.state,"state");
     return (
-      <Network options={options}>
-      {/* <Node id="vader" label="Darth Vader" />
-        <Node id="luke" label="Luke Skywalker" />
-        <Node id="leia" label="Leia Organa" /> */}
-        {/* <Edge id="1" from="vader" to="luke" />
-        <Edge id="2" from="vader" to="leia" /> */}
-        {/* (
-  <>
-    {stations.map(station => (
-      <div className="station" key={station.call}>{station.call}</div>
-    ))}
-  </>
-);  */}
+      
+      <Network options={options} ref="MyNetwork">
+      
          {this.nodes().props.children}
          {this.edges().props.children}
+         {/* {this.state.nodes}
+         {this.state.edges} */}
       </Network>
+     
+      // this.myNetwork()
     );
   }
 }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyNetwork);
+
+// <div id="mynetwork"></div>       
+
+
+// <script type="text/javascript">
+// var firewall = "https://www.shareicon.net/data/128x128/2016/05/12/764037_security_512x512.png";
+// var server = "http://www.clker.com/cliparts/7/A/Y/v/h/E/server-md.png"
+// var router = "https://d29fhpw069ctt2.cloudfront.net/icon/image/49244/preview.svg"
+//     // create an array with nodes
+//     var nodes = new vis.DataSet([
+//         {id: 1, label: 'Router 1', shape: 'circularImage', image: router, "title": "10.148.132.134"},
+//         {id: 2, label: 'Server 2', shape: 'circularImage', image: server, "title": "10.148.132.139"},
+//         {id: 3, label: 'Server 3', shape: 'circularImage', image: server, "title": "10.148.132.124"},
+//         {id: 4, label: 'Server 4', shape: 'circularImage', image: server, "title": "10.148.132.194"},
+//         {id: 5, label: 'Server 5', shape: 'circularImage', image: server, "title": "10.148.132.130"},
+//         {id: 6, label: 'Firewall 1', shape: 'circularImage', image: firewall, "title": "10.148.132.634"},
+//         {id: 7, label: 'Server 7', shape: 'circularImage', image: server, "title": "10.148.132.934"},
+//         {id: 8, label: 'Server 8', shape: 'circularImage', image: server, "title": "10.148.132.134"},
+//     ]);
+
+//     // create an array with edges
+//     var edges = new vis.DataSet([
+//         {from: 1, to: 3},
+//         {from: 1, to: 2},
+//         {from: 2, to: 4},
+//         {from: 1, to: 5},
+//         {from: 2, to: 6},
+//         {from: 6, to: 7},
+//         {from: 7, to: 8},
+//     ]);
+
+//     // create a network
+//     var container = document.getElementById('mynetwork');
+
+//     // provide the data in the vis format
+//     var data = {
+//         nodes: nodes,
+//         edges: edges
+//     };
+    
+//     var options = {
+//         "layout": {
+//             "hierarchical": {
+//                 "direction": "UD",
+//                 "sortMethod": "directed",
+//                 "nodeSpacing": 200,
+//                 "treeSpacing": 400
+//             }
+//         },
+//         "edges": {
+//             "smooth": {
+//                 "type": "continuous"
+//             }
+//         },
+//         // "nodes": {
+//         //     "physics": false
+//         // }
+//         };
+
+//     // initialize your network!
+//     var network = new vis.Network(container, data, options);
+// </script>
+// </div>

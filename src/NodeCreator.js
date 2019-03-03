@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createServerNode, createFirewallNode, createRouterNode } from './actions/simpleAction';
+import Modal from './Modal';
+import Popup from "reactjs-popup";
+import { createServerNode, createFirewallNode, createRouterNode, } from './actions/simpleAction';
 import { bindActionCreators } from "redux"
 
 
-const mapDispatchToProps = dispatch => (bindActionCreators({
-    createServerNode: ()  => dispatch(createServerNode()),
-  createRouterNode: ()  => dispatch(createRouterNode()),
-  createFirewallNode: ()  => dispatch(createFirewallNode()),
-  }, dispatch))
+const mapDispatchToProps = dispatch => ({
+  createServerNode: (fromNode, toNode, imageType)  => {dispatch(createServerNode(fromNode, toNode, imageType))},
+  createRouterNode: ()  => {dispatch(createRouterNode())},
+  createFirewallNode: ()  => {dispatch(createFirewallNode())},
+  createFirewallNode: ()  => {dispatch(createFirewallNode())},
+  } )
   
   /* 
    * mapStateToProps
@@ -18,10 +21,27 @@ const mapDispatchToProps = dispatch => (bindActionCreators({
   })
 
 class NodeCreator extends React.Component {
+  constructor(props) {
+    super(props);
+    const firsttoNode = this.props.topologyReducer.nodeLength+1;
+    this.state = {
+      toNode: firsttoNode,
+      imageType: "Ubuntu Standard", 
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+;
+  }
 
-    createServerNode = (event) => {
-        this.props.createServerNode();
-      }
+    // createServerNode = (fromNode, toNode, imageType) => {
+      
+       
+    //     console.log('here i am')
+    //     console.log(this.props.topologyReducer.nodeLength+1)
+    //     console.log(this.refs.imageType.value)
+    //     this.props.createServerNode(1, this.props.topologyReducer.nodeLength+1, this.refs.imageType.value);
+        
+    //   }
       createRouterNode = (event) => {
         this.props.createRouterNode();
       }
@@ -29,14 +49,45 @@ class NodeCreator extends React.Component {
         this.props.createFirewallNode();
       }
 
-    
+      handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e, "e")
+        console.log(e.target.value, "value")
+        this.props.createServerNode(1, this.state.toNode, this.state.imageType)
+        console.log('Submitted!');
+      }
+
+      handleChange(e) {
+        console.log(e.target.value,"look for me here")
+        this.setState({ imageType: e.target.value, toNode: this.state.toNode+1});
+      }
+      // handleSubmit(e) {
+      //   console.log('here first')
+      //   e.preventDefault();
+      //   console.log('here i am')
+      //   console.log(this.props.topologyReducer.nodeLength+1)
+      //   console.log(this.refs.imageType.value)
+      //   this.props.createServerNode(1, this.props.topologyReducer.nodeLength+1, this.refs.imageType.value);
+      // }
   
     render() {
       return (
           <div>
-         <button onClick={this.createServerNode}>Add a Server</button>
-         <button onClick={this.createRouterNode}>Add a Router</button>
-         <button onClick={this.createFirewallNode}>Add a Firewall</button>
+          {/* <button onClick={this.createServerNode()}>Add a Server</button> */}
+          <Popup trigger={<button> Add a Server</button>} position="right center">
+          <div>Please select your Image Type</div>
+          <form onSubmit={this.handleSubmit}>
+          <select ref="imageType" value={this.state.imageType} onChange={this.handleChange}>
+          <option value="Ubuntu Standard">Ubuntu Standard</option>
+          <option value="CentOS Standard">CentOS Standard</option>
+          <option value="Ubuntu LAMP">Ubuntu LAMP</option>
+          <option value="Ubuntu Bind DNS">Ubuntu Bind DNS</option>
+          </select>
+        <input type="submit" value="Submit" />
+      </form>
+  </Popup>
+         {/* <button onClick={this.createRouterNode}>Add a Router</button>
+         <button onClick={this.createFirewallNode}>Add a Firewall</button> */}
         </div>
         );
     }
