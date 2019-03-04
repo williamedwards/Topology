@@ -8,6 +8,7 @@ import EdgeForm from './EdgeForm';
 import MyNetwork from './MyNetwork';
 import NodeCreator from './NodeCreator';
 import NodeList from './NodeList';
+import TopologySaver from './TopologySaver';
 import MyGraph from './MyGraph';
 
 
@@ -52,9 +53,10 @@ class App extends Component {
    <div className="Topology">
     <MyNetwork/>
     {/* <TopologyFullView/> */}
-    {/* <EdgeForm/> */}
+    <EdgeForm/>
     <NodeCreator/>
     <NodeList/>
+    {/* <TopologySaver/> */}
     {/* <MyGraph/> */}
     {/* <NodeCreator/> */}
     {/* <button onClick={this.createServerNode}>Test adding a Node action</button>

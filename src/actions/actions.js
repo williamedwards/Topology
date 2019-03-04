@@ -85,10 +85,10 @@ export const simpleAction = () => dispatch => {
 export function fetchTemplates() {
   return dispatch => {
     dispatch(fetchTemplatesRequest());
-    return fetch('http://192.168.99.100:81/api/getavailabletemplates')    
-      .then(res => console.log(res))
+    return fetch('http://127.0.0.1:8080/192.168.99.100:81/api/getavailabletemplates')    
+      .then(res => res.json())
       .then(json => {
-        dispatch(fetchTemplatesSuccess(json.data));
+        dispatch(fetchTemplatesSuccess(json));
         return json.data;
       })
       .catch(error => dispatch(fetchTemplatesFailure(error)));

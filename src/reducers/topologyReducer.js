@@ -10,10 +10,14 @@ const InitialState = {
       VMurl: ""
   },
 ],
+  servers: [
+
+  ],
    isFetchingNodeData: false,
    fetchNodeDataSuccess: false,
    fetchNodeDataFailure: false,
    nodeLength: 1,
+   serverLength: 0,
     edges: [  
     ],
     
@@ -35,18 +39,25 @@ export default (state = InitialState, action) => {
       nodeType: 'server',
       imageType: action.imageType
       }
-      var newEdge = {
-        id: state.edgeLength + 1,
-        fromNode: action.fromNode,
-        toNode: action.toNode,
+      var newServer = {
+        id:state.serverLength+1,
+        nodeType: 'server',
+        imageType: action.imageType
+      }
+      // var newEdge = {
+      //   id: state.edgeLength + 1,
+      //   fromNode: action.fromNode,
+      //   toNode: action.toNode,
         
-       }
+      //  }
       return {
         ...state,
         nodes: [...state.nodes, newNode],
+        servers: [...state.servers, newServer],
         nodeLength: state.nodeLength+1,
-        edges: [...state.edges, newEdge],
-        edgeLength: state.edgeLength+1,
+        serverLength: state.serverLength+1,
+        // edges: [...state.edges, newEdge],
+        // edgeLength: state.edgeLength+1,
         // nodeLength: ...state.nodeLength++,
         }
       case 'CREATE_ROUTER_NODE':

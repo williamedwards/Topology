@@ -5,6 +5,7 @@
   "dependencies": {
     "@lifeomic/react-vis-network": "^1.1.0",
     "axios": "^0.18.0",
+    "cors-anywhere": "^0.4.1",
     "d3": "^5.9.1",
     "react": "^16.8.3",
     "react-d3-graph": "^2.0.0-rc2",
@@ -14,6 +15,7 @@
     "reactjs-popup": "^1.3.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "superagent": "^4.1.0",
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {

@@ -43,7 +43,7 @@ class NodeCreator extends React.Component {
 }
 
   componentWillMount() {
-
+    this.props.fetchTemplates();
     this.setState({
       toNode : this.props.topologyReducer.nodeLength+1,
   });
@@ -67,7 +67,7 @@ class NodeCreator extends React.Component {
 
       handleSubmit = (e) => {
         e.preventDefault();
-        this.props.fetchTemplates();
+        
         this.props.createServerNode(1, this.state.toNode, this.state.imageType)
        
       }
@@ -75,8 +75,16 @@ class NodeCreator extends React.Component {
       handleChange(e) {
         this.setState({ imageType: e.target.value});
       }
+
+      // getOptions = () => {
+      //   this.props.topologyReducer.templates.map(template => { 
+      //     return <option value={template.id_string}> {template.id_string} </option>;
+      //     })
+      // }
+      
   
     render() {
+      // var options = this.getOptions();
       return (
           <div>
           {/* <button onClick={this.createServerNode()}>Add a Server</button> */}
@@ -92,8 +100,8 @@ class NodeCreator extends React.Component {
         <input type="submit" value="Submit" />
       </form>
   </Popup>
-         {/* <button onClick={this.createRouterNode}>Add a Router</button>
-         <button onClick={this.createFirewallNode}>Add a Firewall</button> */}
+         <button onClick={this.createRouterNode}>Add a Router</button>
+         <button onClick={this.createFirewallNode}>Add a Firewall</button>
         </div>
         );
     }

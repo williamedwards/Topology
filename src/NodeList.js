@@ -26,19 +26,21 @@ class NodeList extends Component {
     this.state = {
       nodes: this.props.topologyReducer.nodes,
       edges: this.props.topologyReducer.edges,
+      servers: this.props.topologyReducer.servers
     }
     }
 
     componentWillReceiveProps(nextProps) {
       this.setState({
         nodes : nextProps.topologyReducer.nodes,
-        edges: nextProps.topologyReducer.edges
+        edges: nextProps.topologyReducer.edges,
+        servers: nextProps.topologyReducer.servers
     });
   }
     
     nodes(){
       
-        const nodesItems = this.state.nodes.slice(1).map((node) =>
+        const nodesItems = this.state.servers.map((node) =>
             <NodeDescription key= {node.id} id={node.id} nodeType={node.nodeType} imageType={node.imageType}/>
         );
         

@@ -18,22 +18,33 @@ class TopologySaver extends React.Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this);
-
+    
 ;
   }
 
       handleClick()
     {
-        fetch('api/updatetopology', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-             topology: this.props.topologyReducer
-            })
-})
-    }
+      var myTopology = this.props.topologyReducer;
+      
+
+      fetch('http://127.0.0.1:8080/http://192.168.99.100:81/api/postdummy', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+       },
+        body: JSON.stringify(myTopology)
+      })
+      .then(response => {
+        if (response.ok) {
+          response.json().then(json => {
+            console.log(json);
+          });
+        }
+      });
+        
+}
+    
       // handleSubmit(e) {
       //   console.log('here first')
       //   e.preventDefault();
@@ -46,7 +57,7 @@ class TopologySaver extends React.Component {
     render() {
       return (
           <div>
-          <button onClick={this.handleClick}>Add a Router</button>
+          <button onClick={this.handleClick}>Save your Topology</button>
         </div>
         );
     }

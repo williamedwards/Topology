@@ -44,6 +44,8 @@ const mapDispatchToProps = dispatch => ({
 };
 
 var options = {
+  "height": (window.innerHeight -500) + 'px',
+  "width": (window.innerWidth -25) + 'px',
   "layout": {
       "hierarchical": {
           "direction": "UD",
@@ -90,6 +92,9 @@ class MyNetwork extends Component {
     
     var options = {
       layout: {
+        width: (window.innerWidth - 25) + "px",
+        height: (window.innerHeight - 75) + "px",
+        
           hierarchical: {
               direction: "UD",
               sortMethod: "directed",
@@ -180,6 +185,7 @@ class MyNetwork extends Component {
          {/* {this.state.nodes}
          {this.state.edges} */}
       </Network>
+      
      
       // this.myNetwork()
     );
