@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createEdge } from './actions/simpleAction';
+import { createEdge } from './actions/actions';
 import { bindActionCreators } from "redux"
 
 

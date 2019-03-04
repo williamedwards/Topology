@@ -6,14 +6,25 @@ const InitialState = {
       id:1,
       nodeType: "router",
       imageType: "",
+      ip: "",
+      VMurl: ""
   },
 ],
+   isFetchingNodeData: false,
+   fetchNodeDataSuccess: false,
+   fetchNodeDataFailure: false,
    nodeLength: 1,
-// data on the current battle
-edges: [
-  
-],
-  edgeLength: 0,
+    edges: [  
+    ],
+    
+    edgeLength: 0,
+    templates: [
+      {
+      }
+    ],
+    isfetchingTemplates: false,
+    fetchTemplatesSuccess: false,
+    fetchTemplatesFailed: false,
 };
 
 export default (state = InitialState, action) => {
@@ -30,7 +41,6 @@ export default (state = InitialState, action) => {
         toNode: action.toNode,
         
        }
-    console.log("im in the reducer")
       return {
         ...state,
         nodes: [...state.nodes, newNode],
@@ -40,7 +50,7 @@ export default (state = InitialState, action) => {
         // nodeLength: ...state.nodeLength++,
         }
       case 'CREATE_ROUTER_NODE':
-     var newNode = {
+      var newNode = {
       id:state.nodeLength+1,
       nodeType: 'router',
       
@@ -55,7 +65,6 @@ export default (state = InitialState, action) => {
      var newNode = {
       id:state.nodeLength+1,
       nodeType: 'firewall',
-      
       }
         return {
         ...state,
@@ -78,7 +87,61 @@ export default (state = InitialState, action) => {
         edgeLength: state.edgeLength+1,
         }
       
+      case 'FETCH_NODE_DATA_REQUEST':
+      return {
+        ...state,
+        isFetchingNodeData: true,
+        fetchNodeDataSuccess:false,
+        fetchNodeDataFailure:false,
+      };
+
+    case 'FETCH_NODE_DATA_SUCCESS':
+      
+      return {
+        ...state,
+        isFetchingNodeData: false,
+        data: action.data,
+        fetchNodeDataSuccess:true,
+        fetchNodeDataFailure:false,
+      };
+
+    case 'FETCH_NODE_DATA_FAILURE':
+     
+      return {
+        ...state,
+        isFetchingNodeData: false,
+        fetchNodeDataSuccess:false,
+        fetchNodeDataFailure:true,
+      };
+      case 'FETCH_TEMPLATES_REQUEST':
+      return {
+        ...state,
+        isFetchingTemplates: true,
+        fetchTemplatesSuccess:false,
+        fetchTemplatesFailure:false,
+      };
+
+    case 'FETCH_TEMPLATES_SUCCESS':
+      
+      return {
+        ...state,
+        isFetchingTemplates: false,
+        templates: action.data,
+        fetchTemplatesSuccess:true,
+        fetchTemplatesFailure:false,
+      };
+
+    case 'FETCH_TEMPLATES_FAILURE':
+     
+      return {
+        ...state,
+        isFetchingTemplates: false,
+        fetchTemplatesSuccess:false,
+        fetchTemplatesFailure:true,
+      };
      default:
       return state
     }
    }
+
+   

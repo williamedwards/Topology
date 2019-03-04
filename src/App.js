@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './App.css';
-import { simpleAction, createServerNode, createEdge, createFirewallNode, createRouterNode } from './actions/simpleAction';
+import { simpleAction, createServerNode, createEdge, createFirewallNode, createRouterNode } from './actions/actions';
 import TopologyFullView from './TopologyFullView';
 import EdgeForm from './EdgeForm';
 import MyNetwork from './MyNetwork';

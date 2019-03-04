@@ -30,7 +30,6 @@ class NodeList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-      console.log('I got new props', nextProps);
       this.setState({
         nodes : nextProps.topologyReducer.nodes,
         edges: nextProps.topologyReducer.edges

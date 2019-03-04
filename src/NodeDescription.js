@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction, createServerNode, createEdge, createFirewallNode, createRouterNode } from './actions/simpleAction';
+import { simpleAction, createServerNode, createEdge, createFirewallNode, createRouterNode } from './actions/actions';
 import NodeCreator from './NodeCreator';
 import NodeList from './NodeList'
 

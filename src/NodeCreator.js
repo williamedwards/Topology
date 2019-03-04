@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from './Modal';
 import Popup from "reactjs-popup";
-import { createServerNode, createFirewallNode, createRouterNode, } from './actions/simpleAction';
+import { createServerNode, createFirewallNode, createRouterNode, fetchTemplates} from './actions/actions';
 import { bindActionCreators } from "redux"
 
 
@@ -11,6 +11,7 @@ const mapDispatchToProps = dispatch => ({
   createRouterNode: ()  => {dispatch(createRouterNode())},
   createFirewallNode: ()  => {dispatch(createFirewallNode())},
   createFirewallNode: ()  => {dispatch(createFirewallNode())},
+  fetchTemplates: () => {dispatch(fetchTemplates())}
   } )
   
   /* 
@@ -30,10 +31,11 @@ class NodeCreator extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
+    
 ;
   }
   componentWillReceiveProps(nextProps) {
-    console.log('I got new props', nextProps);
+  
     this.setState({
       toNode : nextProps.topologyReducer.nodeLength+1,
       
@@ -41,7 +43,7 @@ class NodeCreator extends React.Component {
 }
 
   componentWillMount() {
-    console.log("i mounted",);
+
     this.setState({
       toNode : this.props.topologyReducer.nodeLength+1,
   });
@@ -65,24 +67,14 @@ class NodeCreator extends React.Component {
 
       handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e, "e")
-        console.log(e.target.value, "value")
+        this.props.fetchTemplates();
         this.props.createServerNode(1, this.state.toNode, this.state.imageType)
-        console.log('Submitted!');
+       
       }
 
       handleChange(e) {
-        console.log(e.target.value,"look for me here")
         this.setState({ imageType: e.target.value});
       }
-      // handleSubmit(e) {
-      //   console.log('here first')
-      //   e.preventDefault();
-      //   console.log('here i am')
-      //   console.log(this.props.topologyReducer.nodeLength+1)
-      //   console.log(this.refs.imageType.value)
-      //   this.props.createServerNode(1, this.props.topologyReducer.nodeLength+1, this.refs.imageType.value);
-      // }
   
     render() {
       return (

@@ -76,12 +76,12 @@ class MyNetwork extends Component {
     }
 
     componentWillMount() {
-      console.log("i mounted");
+      
   
     }
 
     componentWillReceiveProps(nextProps) {
-      console.log('I got new props', nextProps);
+      
       this.setState({
         nodes : nextProps.topologyReducer.nodes,
         edges: nextProps.topologyReducer.edges
@@ -117,7 +117,7 @@ class MyNetwork extends Component {
     }
       };
   Network.network.setOptions(options);
-  // Network.network.fit()
+  Network.network.fit();
   }
     
     
@@ -170,9 +170,7 @@ class MyNetwork extends Component {
   // }
     
   render() {
-    console.log(this.nodes(), 'this.nodes')
-    console.log(this.nodes().props.children, 'children')
-    console.log(this.state,"state");
+    
     return (
       
       <Network options={options} ref="MyNetwork">
