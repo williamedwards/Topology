@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@lifeomic/react-vis-network": "^1.1.0",
     "axios": "^0.18.0",
+    "babel-preset-react": "^6.24.1",
     "d3": "^5.9.1",
     "react": "^16.8.3",
     "react-d3-graph": "^2.0.0-rc2",
@@ -32,6 +34,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8"
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "webpack": "^4.28.3",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.2.3"
   }
 }

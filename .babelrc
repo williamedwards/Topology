@@ -1,0 +1,11 @@
+/* 
+    ./.babelrc
+*/  
+{
+    "presets":[
+        "@babel/env", "@babel/react" //, "@babel/preset-es2015"
+    ],
+    "plugins" : [
+      "@babel/plugin-proposal-class-properties"
+    ]
+}        
